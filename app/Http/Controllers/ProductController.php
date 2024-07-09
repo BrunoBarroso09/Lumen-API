@@ -23,7 +23,7 @@ class ProductController extends Controller
             'title' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required',
         ]);
 
         $product = new Product();
@@ -63,7 +63,7 @@ class ProductController extends Controller
             'title' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo' => 'required',
         ]);
 
         $product = Product::find($id);

@@ -13,10 +13,10 @@
 |
 */
 
-$router->get('/product', 'ProductController@index');
+$router->get('/products', 'ProductController@index');
 $router->get('/product/{id}', 'ProductController@show');
 $router->post('/product/create', 'ProductController@store');
-$router->put('/product/update/{id}', 'ProductController@update');
+$router->post('/product/update/{id}', 'ProductController@update');
 $router->delete('/product/delete/{id}', 'ProductController@destroy');
 
 $router->get('/', function () use ($router) {
