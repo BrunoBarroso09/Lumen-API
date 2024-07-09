@@ -59,6 +59,34 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         //Update product by Id
+        $this->validate($request,[
+            'title' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $product = Product::find($id);
+
+        if($request->hasFile('photo')){
+            $file = $request->file('photo');
+            $allowfileExtension = ['jpg', 'png', 'jpeg'];
+            $extension = $file->getClientOriginalExtension();
+            $check = in_array($extension, $allowfileExtension);
+
+            if($check){
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $product->photo = $name;
+            }
+        }
+
+        $product->title = $request->input('title');
+        $product->price = $request->input('price');
+        $product->description = $request->input('description');
+        $product->save();
+
+        return response()->json($product);
     }
 
     public function destroy($id)
